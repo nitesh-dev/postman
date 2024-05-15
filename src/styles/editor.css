@@ -1,0 +1,79 @@
+.editor {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+}
+
+/* editor header */
+.editor .editor-header {
+  height: 40px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* editor footer  */
+.editor .editor-footer {
+  height: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* editor center */
+.editor .center-area {
+  display: grid;
+  grid-template-columns: max-content auto max-content;
+}
+
+/* editor left sidebar */
+.editor .left-sidebar {
+  position: relative;
+  width: 400px;
+  background-color: var(--color-surface-variant);
+  height: 100%;
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+
+.editor .left-sidebar .icon-bar {
+  width: 50px;
+  border-right: 1px solid var(--color-border);
+}
+
+/* editor main */
+.editor .editor-main {
+  display: grid;
+  grid-template-columns: auto max-content;
+}
+
+.editor .editor-main .main-holder {
+  display: grid;
+  grid-template-rows: auto 200px;
+}
+
+/* editor right sidebar */
+.editor .right-sidebar {
+  width: 300px;
+  background-color: var(--color-surface-variant);
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto max-content;
+  border-left: 1px solid var(--color-border);
+}
+
+.editor .right-sidebar .icon-bar {
+  width: 40px;
+  border-left: 1px solid var(--color-border);
+}
+
+/* editor output area */
+.editor .editor-output-area {
+  border-top: 1px solid var(--color-border);
+}
+
+/* editor request area */
+.editor-request-area .tabs {
+  height: 40px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}

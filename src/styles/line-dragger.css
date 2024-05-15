@@ -1,0 +1,24 @@
+.editor .line-dragger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  /* background-color: rgba(0, 0, 0, 0.096); */
+  display: flex;
+  justify-content: center;
+  transform: translateX(50%);
+}
+
+.editor .line-dragger .overlay-border {
+  display: block;
+  height: 100%;
+  width: 1px;
+  background-color: var(--color-border);
+  /* border-right: 1px solid var(--color-border); */
+}
+
+.editor .line-dragger:hover .overlay-border {
+  background-color: var(--color-primary);
+}

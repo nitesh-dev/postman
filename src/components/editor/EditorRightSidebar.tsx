@@ -1,0 +1,13 @@
+export default function EditorRightSidebar() {
+  return (
+    <div className="right-sidebar">
+      <div className="right-content-area">
+        <p>hello right area</p>
+      </div>
+      <div className="icon-bar">
+        <div className="tab-item">hello Tab</div>
+        <div className="tab-item">hello Tab</div>
+      </div>
+    </div>
+  );
+}
