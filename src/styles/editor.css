@@ -29,9 +29,8 @@
   background-color: var(--color-surface-variant);
   height: 100%;
   display: grid;
-  grid-template-columns: max-content auto;
+  grid-template-columns: max-content auto max-content;
 }
-
 
 .editor .left-sidebar .icon-bar {
   width: 50px;
@@ -51,12 +50,13 @@
 
 /* editor right sidebar */
 .editor .right-sidebar {
+  position: relative;
   width: 300px;
   background-color: var(--color-surface-variant);
   height: 100%;
   display: grid;
-  grid-template-columns: auto max-content;
-  border-left: 1px solid var(--color-border);
+  grid-template-columns: max-content auto max-content;
+  /* border-left: 1px solid var(--color-border); */
 }
 
 .editor .right-sidebar .icon-bar {
@@ -65,8 +65,9 @@
 }
 
 /* editor output area */
-.editor .editor-output-area {
-  border-top: 1px solid var(--color-border);
+.editor-output-area {
+  display: grid;
+  grid-template-rows: max-content auto;
 }
 
 /* editor request area */

@@ -1,4 +1,4 @@
-import LineDragger from "../LineDragger";
+import LineDragger from "./LineDragger";
 
 export default function EditorLeftSidebar() {
   return (
@@ -11,7 +11,7 @@ export default function EditorLeftSidebar() {
       <div className="left-tab-area">
         <p>Hello left area</p>
       </div>
-      <LineDragger />
+      <LineDragger isVertical={true} />
     </div>
   );
 }
