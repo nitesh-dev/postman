@@ -33,6 +33,12 @@
   width: 100%;
 }
 
-.line-dragger:hover .overlay-border {
+.line-dragger:hover.vertical .overlay-border {
   background-color: var(--color-primary);
+  width: 2px;
+}
+
+.line-dragger:hover.horizontal .overlay-border {
+  background-color: var(--color-primary);
+  height: 2px;
 }

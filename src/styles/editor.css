@@ -40,13 +40,9 @@
 /* editor main */
 .editor .editor-main {
   display: grid;
-  grid-template-columns: auto max-content;
-}
-
-.editor .editor-main .main-holder {
-  display: grid;
   grid-template-rows: auto 200px;
 }
+
 
 /* editor right sidebar */
 .editor .right-sidebar {
