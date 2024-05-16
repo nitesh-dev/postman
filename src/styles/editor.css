@@ -19,17 +19,17 @@
 /* editor center */
 .editor .center-area {
   display: grid;
-  grid-template-columns: max-content auto max-content;
+  /* grid-template-columns: 400px auto 250px; */
 }
 
 /* editor left sidebar */
 .editor .left-sidebar {
   position: relative;
-  width: 400px;
+  width: 100%;
   background-color: var(--color-surface-variant);
   height: 100%;
   display: grid;
-  grid-template-columns: max-content auto max-content;
+  grid-template-columns: max-content auto;
 }
 
 .editor .left-sidebar .icon-bar {
@@ -40,18 +40,17 @@
 /* editor main */
 .editor .editor-main {
   display: grid;
-  grid-template-rows: auto 200px;
+  /* grid-template-rows: auto 200px; */
 }
-
 
 /* editor right sidebar */
 .editor .right-sidebar {
   position: relative;
-  width: 300px;
+  width: 100%;
   background-color: var(--color-surface-variant);
   height: 100%;
   display: grid;
-  grid-template-columns: max-content auto max-content;
+  grid-template-columns: auto max-content;
   /* border-left: 1px solid var(--color-border); */
 }
 
@@ -62,6 +61,7 @@
 
 /* editor output area */
 .editor-output-area {
+  position: relative;
   display: grid;
   grid-template-rows: max-content auto;
 }

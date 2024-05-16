@@ -1,9 +1,13 @@
 import LineDragger from "./LineDragger";
 
-export default function EditorRightSidebar() {
+export default function EditorRightSidebar({
+  onDrag,
+}: {
+  onDrag(x: number, y: number): void;
+}) {
   return (
     <div className="right-sidebar">
-      <LineDragger isVertical={true} />
+      <LineDragger isVertical={true} onMove={onDrag} isDisabled={false} isLtr={true} />
       <div className="right-content-area">
         <p>hello right area</p>
       </div>
