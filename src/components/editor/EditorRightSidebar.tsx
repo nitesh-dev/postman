@@ -1,4 +1,5 @@
 import LineDragger from "./LineDragger";
+import "../../styles/editor/right-sidebar.css"
 
 export default function EditorRightSidebar({
   onDrag,

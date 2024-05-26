@@ -1,0 +1,24 @@
+.search-bar {
+  display: grid;
+  grid-template-columns: max-content auto;
+  align-items: center;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  height: 2em;
+  border-radius: var(--border-radius);
+  gap: 0.5em;
+  fill: var(--color-on-surface);
+  padding: 0 0.5em;
+}
+
+.search-bar svg{
+    width: 1.2em;
+    height: auto;
+    opacity: 0.7;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  width: 100%;
+}

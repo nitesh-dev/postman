@@ -1,0 +1,149 @@
+/* editor left sidebar */
+.left-sidebar {
+  position: relative;
+  background-color: var(--color-surface-variant);
+  display: grid;
+  grid-template-rows: max-content auto;
+}
+
+.left-sidebar *{
+  user-select: none;
+}
+
+.left-sidebar .header {
+  height: 40px;
+  border-bottom: 1px solid var(--color-border);
+  display: grid;
+  align-items: center;
+  grid-template-columns: max-content max-content;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.left-sidebar .header .right {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.left-sidebar .content {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+.left-sidebar .icon-bar {
+  padding: 0.5rem 0;
+  width: 50px;
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.left-sidebar .icon-bar button {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+}
+
+.left-sidebar .icon-bar button.active,
+.left-sidebar .icon-bar button:hover {
+  background-color: var(--color-primary);
+  fill: var(--color-on-primary);
+}
+
+.left-sidebar .icon-bar button svg {
+  fill: inherit;
+  width: 28px;
+  height: auto;
+}
+
+.left-sidebar .left-tab-area .search-bar {
+  margin: 1rem;
+}
+
+/* request hierarchy */
+
+.request-hierarchy {
+  display: grid;
+  grid-template-rows: max-content auto;
+  height: 100%;
+}
+
+.request-hierarchy>div{
+  overflow-y: auto;
+}
+
+.request-hierarchy .item-header {
+  display: grid;
+  grid-template-columns: 20px 40px auto max-content;
+  align-items: center;
+  gap: 0.2rem;
+  height: 2em;
+  /* padding: 0 1rem; */
+  /* background-color: rgba(0, 0, 0, 0.13); */
+}
+
+.request-hierarchy .item-header .icon-arrow {
+  height: 12px !important;
+  width: max-content;
+  margin: auto;
+}
+
+.request-hierarchy .item-header svg {
+  height: 18px;
+  /* width: 100%; */
+  margin-left: auto;
+  fill: rgb(129, 129, 129);
+}
+
+/* .request-hierarchy .item-header.folder {
+  grid-template-columns: auto max-content;
+  position: relative;
+} */
+
+/* .request-hierarchy .item-header.folder > svg {
+  position: absolute;
+  left: 0;
+  height: 12px;
+} */
+
+.request-hierarchy .item-header:hover {
+  background-color: rgba(0, 0, 0, 0.13);
+}
+
+.request-hierarchy .item-children {
+  /* margin-left: 2rem; */
+  position: relative;
+}
+
+.request-hierarchy .item input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.request-hierarchy input:disabled{
+  pointer-events: none;
+}
+
+.request-hierarchy .item-header img {
+  height: 8px;
+  display: block;
+  margin-left: auto;
+  margin-top: 1px;
+  opacity: 0.7;
+}
+
+.request-hierarchy .item-children .line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-left: 1px dashed rgb(212, 212, 212);
+  left: 1rem;
+}

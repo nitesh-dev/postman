@@ -1,0 +1,6 @@
+
+/* editor header */
+.editor .editor-header {
+    height: 40px;
+    border-bottom: 1px solid var(--color-border);
+  }

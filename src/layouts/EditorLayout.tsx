@@ -19,7 +19,7 @@ export default function EditorLayout() {
 
   const layoutProps = useRef<LayoutProps>({
     leftSidebarWidth: 250,
-    leftSidebarMinWidth: 200,
+    leftSidebarMinWidth: 300,
     rightSidebarWidth: 250,
     rightSidebarMinWidth: 200,
     centerMinWidth: 500,

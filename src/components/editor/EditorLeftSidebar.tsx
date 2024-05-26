@@ -1,31 +1,68 @@
 import { useState } from "react";
 import LineDragger from "./LineDragger";
+import CollectionIcon from "../icon/CollectionIcon";
+import "../../styles/editor/left-sidebar.css";
+import SearchBar from "../widget/SearchBar";
+import RequestHierarchy from "./RequestHierarchy";
+
+enum Tab {
+  None,
+  Collection,
+  Environment,
+}
 
 export default function EditorLeftSidebar({
   onDrag,
 }: {
   onDrag(x: number, y: number): void;
 }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [activeTab, setActiveTab] = useState<Tab>(Tab.Collection);
 
   return (
     <div className="left-sidebar">
-      <div className="icon-bar">
-        <div className="icon">icon1</div>
-        <div className="icon">icon2</div>
-        <div className="icon">icon3</div>
-      </div>
-      {isOpen && (
-        <div className="left-tab-area">
-          <p>Hello left area</p>
+      <div className="header">
+        <span>Nitesh Collection</span>
+        <div className="right">
+          <button className="btn outline">New</button>
+          <button className="btn primary">Import</button>
         </div>
-      )}
-      <LineDragger
-        isVertical={true}
-        onMove={onDrag}
-        isDisabled={false}
-        isLtr={false}
-      />
+      </div>
+      <div className="content">
+        <div className="icon-bar">
+          <button className="icon btn icon-btn active">
+            <CollectionIcon />
+          </button>
+          <button className="icon btn icon-btn">
+            <CollectionIcon />
+          </button>
+          <button className="icon btn icon-btn">
+            <CollectionIcon />
+          </button>
+        </div>
+
+        {/* tab - content */}
+        {activeTab == Tab.Collection && (
+          <div className="left-tab-area">
+            <SearchBar/>
+            <RequestHierarchy/>
+          </div>
+        )}
+
+        {activeTab == Tab.Environment && (
+          <div className="left-tab-area">
+            <p>Hello left area</p>
+          </div>
+        )}
+
+         
+        {/* dragger */}
+        <LineDragger
+          isVertical={true}
+          onMove={onDrag}
+          isDisabled={false}
+          isLtr={false}
+        />
+      </div>
     </div>
   );
 }

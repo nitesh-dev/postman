@@ -1,3 +1,5 @@
+import "../../styles/editor/request-area.css"
+
 export default function EditorRequestArea() {
   return (
     <div className="editor-request-area">

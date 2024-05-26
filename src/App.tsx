@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Editor from "./pages/Editor";
 
-function App() {
 
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -12,7 +12,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,4 +1,5 @@
 import LineDragger from "./LineDragger";
+import "../../styles/editor/output-area.css"
 
 export default function EditorOutputArea({
   onDrag,

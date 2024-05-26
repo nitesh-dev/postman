@@ -1,0 +1,7 @@
+/* editor output area */
+.editor-output-area {
+    position: relative;
+    display: grid;
+    grid-template-rows: max-content auto;
+  }
+  
