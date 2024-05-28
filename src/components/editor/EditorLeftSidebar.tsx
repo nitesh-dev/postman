@@ -27,7 +27,10 @@ export default function EditorLeftSidebar({
         </div>
       </div>
       <div className="content">
-        <div className="icon-bar" style={{width: layoutProps?.current.leftSidebar.iconPanelWidth}}>
+        <div
+          className="icon-bar"
+          style={{ width: layoutProps?.current.leftSidebar.iconPanelWidth }}
+        >
           <button className="icon btn icon-btn active">
             <CollectionIcon />
           </button>
