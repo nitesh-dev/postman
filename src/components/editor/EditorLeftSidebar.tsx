@@ -1,22 +1,21 @@
-import { useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import LineDragger from "./LineDragger";
 import CollectionIcon from "../icon/CollectionIcon";
 import "../../styles/editor/left-sidebar.css";
 import SearchBar from "../widget/SearchBar";
 import RequestHierarchy from "./RequestHierarchy";
-
-enum Tab {
-  None,
-  Collection,
-  Environment,
-}
+import { EditorLayoutContext, LeftSideBarPanelType } from "../../pages/Editor";
 
 export default function EditorLeftSidebar({
   onDrag,
 }: {
   onDrag(x: number, y: number): void;
 }) {
-  const [activeTab, setActiveTab] = useState<Tab>(Tab.Collection);
+  const layoutProps = useContext(EditorLayoutContext);
+
+  const [activeTab, setActiveTab] = useState<LeftSideBarPanelType>(
+    LeftSideBarPanelType.none
+  );
 
   return (
     <div className="left-sidebar">
@@ -28,7 +27,7 @@ export default function EditorLeftSidebar({
         </div>
       </div>
       <div className="content">
-        <div className="icon-bar">
+        <div className="icon-bar" style={{width: layoutProps?.current.leftSidebar.iconPanelWidth}}>
           <button className="icon btn icon-btn active">
             <CollectionIcon />
           </button>
@@ -41,20 +40,19 @@ export default function EditorLeftSidebar({
         </div>
 
         {/* tab - content */}
-        {activeTab == Tab.Collection && (
+        {activeTab == LeftSideBarPanelType.collection && (
           <div className="left-tab-area">
-            <SearchBar/>
-            <RequestHierarchy/>
+            <SearchBar />
+            <RequestHierarchy />
           </div>
         )}
 
-        {activeTab == Tab.Environment && (
+        {activeTab == LeftSideBarPanelType.environment && (
           <div className="left-tab-area">
             <p>Hello left area</p>
           </div>
         )}
 
-         
         {/* dragger */}
         <LineDragger
           isVertical={true}

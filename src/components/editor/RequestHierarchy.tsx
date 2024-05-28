@@ -7,7 +7,7 @@ import PatchIcon from "../../assets/icons/PATCH.svg";
 import DeleteIcon from "../../assets/icons/DELETE.svg";
 import OptionsIcon from "../../assets/icons/OPTIONS.svg";
 import HeadIcon from "../../assets/icons/HEAD.svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { getUniqueId } from "../../extra/utils";
 
 export enum ChildType {
@@ -31,6 +31,7 @@ export interface Tree {
 }
 
 export default function RequestHierarchy() {
+  const hierarchyRef = useRef<HTMLDivElement>(null);
   const [hierarchy, setHierarchy] = useState<Tree[]>([
     {
       id: getUniqueId(),
@@ -120,99 +121,101 @@ export default function RequestHierarchy() {
               isFav: true,
               type: ChildType.Folder,
               isOpen: true,
-              children: [ {
-                id: getUniqueId(),
-                name: "Request 1",
-                isFav: true,
-                type: ChildType.Post,
-              },
-              {
-                id: getUniqueId(),
-                name: "Request 1",
-                isFav: true,
-                type: ChildType.Patch,
-              },
-              {
-                id: getUniqueId(),
-                name: "Request 1",
-                isFav: true,
-                type: ChildType.Delete,
-              },
-              {
-                id: getUniqueId(),
-                name: "Request 1",
-                isFav: true,
-                type: ChildType.Head,
-              },
-              {
-                id: getUniqueId(),
-                name: "Request 1",
-                isFav: true,
-                type: ChildType.Options,
-              },
-              {
-                id: getUniqueId(),
-                name: "Folder 2",
-                isFav: true,
-                type: ChildType.Folder,
-                isOpen: true,
-                children: [],
-              },
-              {
-                id: getUniqueId(),
-                name: "Folder 3",
-                isFav: true,
-                type: ChildType.Folder,
-                isOpen: true,
-                children: [
-                  {
-                    id: getUniqueId(),
-                    name: "Request 1",
-                    isFav: true,
-                    type: ChildType.Post,
-                  },
-                  {
-                    id: getUniqueId(),
-                    name: "Request 1",
-                    isFav: true,
-                    type: ChildType.Patch,
-                  },
-                  {
-                    id: getUniqueId(),
-                    name: "Request 1",
-                    isFav: true,
-                    type: ChildType.Delete,
-                  },
-                  {
-                    id: getUniqueId(),
-                    name: "Request 1",
-                    isFav: true,
-                    type: ChildType.Head,
-                  },
-                  {
-                    id: getUniqueId(),
-                    name: "Request 1",
-                    isFav: true,
-                    type: ChildType.Options,
-                  },
-                  {
-                    id: getUniqueId(),
-                    name: "Folder 2",
-                    isFav: true,
-                    type: ChildType.Folder,
-                    isOpen: true,
-                    children: [],
-                  },
-                  {
-                    id: getUniqueId(),
-                    name: "Folder 3",
-                    isFav: true,
-                    type: ChildType.Folder,
-                    isOpen: true,
-                    children: [],
-                  },
-                ],
-              },],
+              children: [
+                {
+                  id: getUniqueId(),
+                  name: "Request 1",
+                  isFav: true,
+                  type: ChildType.Post,
+                },
+                {
+                  id: getUniqueId(),
+                  name: "Request 1",
+                  isFav: true,
+                  type: ChildType.Patch,
+                },
+                {
+                  id: getUniqueId(),
+                  name: "Request 1",
+                  isFav: true,
+                  type: ChildType.Delete,
+                },
+                {
+                  id: getUniqueId(),
+                  name: "Request 1",
+                  isFav: true,
+                  type: ChildType.Head,
+                },
+                {
+                  id: getUniqueId(),
+                  name: "Request 1",
+                  isFav: true,
+                  type: ChildType.Options,
+                },
+                {
+                  id: getUniqueId(),
+                  name: "Folder 2",
+                  isFav: true,
+                  type: ChildType.Folder,
+                  isOpen: true,
+                  children: [],
+                },
+                {
+                  id: getUniqueId(),
+                  name: "Folder 3",
+                  isFav: true,
+                  type: ChildType.Folder,
+                  isOpen: true,
+                  children: [
+                    {
+                      id: getUniqueId(),
+                      name: "Request 1",
+                      isFav: true,
+                      type: ChildType.Post,
+                    },
+                    {
+                      id: getUniqueId(),
+                      name: "Request 1",
+                      isFav: true,
+                      type: ChildType.Patch,
+                    },
+                    {
+                      id: getUniqueId(),
+                      name: "Request 1",
+                      isFav: true,
+                      type: ChildType.Delete,
+                    },
+                    {
+                      id: getUniqueId(),
+                      name: "Request 1",
+                      isFav: true,
+                      type: ChildType.Head,
+                    },
+                    {
+                      id: getUniqueId(),
+                      name: "Request 1",
+                      isFav: true,
+                      type: ChildType.Options,
+                    },
+                    {
+                      id: getUniqueId(),
+                      name: "Folder 2",
+                      isFav: true,
+                      type: ChildType.Folder,
+                      isOpen: true,
+                      children: [],
+                    },
+                    {
+                      id: getUniqueId(),
+                      name: "Folder 3",
+                      isFav: true,
+                      type: ChildType.Folder,
+                      isOpen: true,
+                      children: [],
+                    },
+                  ],
+                },
+              ],
             },
             {
               id: getUniqueId(),
@@ -408,7 +411,7 @@ export default function RequestHierarchy() {
     ));
   }
   return (
-    <div className="request-hierarchy">
+    <div ref={hierarchyRef} id="request-hierarchy" className="request-hierarchy">
       <div>{renderTree(hierarchy, 0)}</div>
     </div>
   );

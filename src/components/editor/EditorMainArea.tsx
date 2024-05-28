@@ -1,42 +1,34 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import EditorOutputArea from "./EditorOutputArea";
 import EditorRequestArea from "./EditorRequestArea";
+import { EditorLayoutContext } from "../../pages/Editor";
 
-interface LayoutProps {
-  outputAreaHeight: number;
-  outputAreaMinHeight: number;
-  requestAreaMinHeight: number;
-}
 
 export default function EditorMainArea() {
+  const layoutProps = useContext(EditorLayoutContext);
   const centerDiv = useRef<HTMLDivElement>(null);
-  const layoutProps = useRef<LayoutProps>({
-    outputAreaHeight: 250,
-    outputAreaMinHeight: 200,
-    requestAreaMinHeight: 200,
-  });
 
   function onDrag(_: number, y: number) {
-    if (!centerDiv.current) return;
+    if (!centerDiv.current || !layoutProps) return;
 
     const totalHeight = centerDiv.current.clientHeight;
     y = totalHeight - y + centerDiv.current.offsetTop;
 
-    if (y < layoutProps.current.outputAreaMinHeight) {
-      y = layoutProps.current.outputAreaMinHeight;
+    if (y < layoutProps.current.mainArea.outputArea.minHeight) {
+      y = layoutProps.current.mainArea.outputArea.minHeight;
     }
 
     const maxHeight =
       totalHeight -
-      (layoutProps.current.outputAreaMinHeight +
-        layoutProps.current.requestAreaMinHeight);
+      (layoutProps.current.mainArea.outputArea.minHeight +
+        layoutProps.current.mainArea.requestArea.minHeight);
 
     if (y > maxHeight) {
       y = maxHeight;
     }
 
-    layoutProps.current.outputAreaHeight = y;
-    centerDiv.current.style.gridTemplateRows = `auto ${layoutProps.current.outputAreaHeight}px`;
+    layoutProps.current.mainArea.outputArea.height = y;
+    centerDiv.current.style.gridTemplateRows = `auto ${layoutProps.current.mainArea.outputArea.height}px`;
   }
 
 

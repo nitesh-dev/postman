@@ -71,6 +71,7 @@
   display: grid;
   grid-template-rows: max-content auto;
   height: 100%;
+  overflow-y: auto;
 }
 
 .request-hierarchy>div{
