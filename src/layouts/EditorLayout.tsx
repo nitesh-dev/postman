@@ -4,63 +4,79 @@ import EditorLeftSidebar from "../components/editor/EditorLeftSidebar";
 import "../styles/editor.css";
 import EditorMainArea from "../components/editor/EditorMainArea";
 import EditorRightSidebar from "../components/editor/EditorRightSidebar";
-import { useContext, useEffect, useRef, useState } from "react";
-import { EditorLayoutContext } from "../pages/Editor";
-
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useEditorPropStore } from "../store/editorPropStore";
+import { useShallow } from "zustand/react/shallow";
 
 export default function EditorLayout() {
+  const [
+    leftSidebarMinWidth,
+    rightSidebarMinWidth,
+    mainAreaMinWidth,
+    setLeftSidebarWidth,
+    setRightSidebarWidth,
+  ] = useEditorPropStore(
+    useShallow((state) => [
+      state.leftSidebar.minWidth,
+      state.rightSidebar.minWidth,
+      state.mainArea.minWidth,
+      state.setLeftSidebarWidth,
+      state.setRightSidebarWidth,
+    ])
+  );
   const centerDiv = useRef<HTMLDivElement>(null);
-  const layoutProps = useContext(EditorLayoutContext);
 
   useEffect(() => {
     onLeftSidebarDrag(300, 0);
   }, []);
 
   function onLeftSidebarDrag(x: number, _: number) {
-    if (!centerDiv.current || !layoutProps) return;
+    if (!centerDiv.current) return;
 
-    if (x < layoutProps.current.leftSidebar.minWidth) {
-      x = layoutProps.current.leftSidebar.minWidth;
+    if (x < leftSidebarMinWidth) {
+      x = leftSidebarMinWidth;
     }
+    const rightSidebarWidth = useEditorPropStore.getState().rightSidebar.width;
 
-    const maxWidth =
-      window.innerWidth -
-      (layoutProps.current.mainArea.minWidth +
-        layoutProps.current.rightSidebar.width);
+    const maxWidth = window.innerWidth - (mainAreaMinWidth + rightSidebarWidth);
 
     if (x > maxWidth) {
       x = maxWidth;
     }
 
-    layoutProps.current.leftSidebar.width = x;
-    centerDiv.current.style.gridTemplateColumns = `${x}px auto ${layoutProps.current.rightSidebar.width}px`;
+    setLeftSidebarWidth(x);
+
+    centerDiv.current.style.gridTemplateColumns = `${x}px auto ${rightSidebarWidth}px`;
   }
 
   function onRightSidebarDrag(x: number, _: number) {
-    if (!centerDiv.current || !layoutProps) return;
+    if (!centerDiv.current) return;
 
     let width = window.innerWidth - x;
-    if (width < layoutProps.current.rightSidebar.minWidth) {
-      width = layoutProps.current.rightSidebar.minWidth;
+    if (width < rightSidebarMinWidth) {
+      width = rightSidebarMinWidth;
     }
 
-    const maxWidth =
-      window.innerWidth -
-      (layoutProps.current.mainArea.minWidth +
-        layoutProps.current.leftSidebar.width);
+    const leftSidebarWidth = useEditorPropStore.getState().leftSidebar.width;
+
+    const maxWidth = window.innerWidth - (mainAreaMinWidth + leftSidebarWidth);
 
     if (width > maxWidth) {
       width = maxWidth;
     }
 
-    layoutProps.current.rightSidebar.width = width;
-    centerDiv.current.style.gridTemplateColumns = `${layoutProps.current.leftSidebar.width}px auto ${width}px`;
+    setRightSidebarWidth(width);
+    centerDiv.current.style.gridTemplateColumns = `${leftSidebarWidth}px auto ${width}px`;
   }
 
   return (
     <div className="editor">
       <EditorHeader />
-      <div className="center-area" ref={centerDiv}>
+      <div
+        className="center-area"
+        ref={centerDiv}
+        // style={{ gridTemplateColumns: `${x}px auto ${rightSidebarWidth}px` }}
+      >
         <EditorLeftSidebar onDrag={onLeftSidebarDrag} />
         <EditorMainArea />
         <EditorRightSidebar onDrag={onRightSidebarDrag} />

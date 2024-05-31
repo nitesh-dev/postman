@@ -1,40 +1,51 @@
 import { useContext, useEffect, useRef } from "react";
 import EditorOutputArea from "./EditorOutputArea";
 import EditorRequestArea from "./EditorRequestArea";
-import { EditorLayoutContext } from "../../pages/Editor";
-
+import { useEditorPropStore } from "../../store/editorPropStore";
+import { shallow } from "zustand/shallow";
+import { useShallow } from "zustand/react/shallow";
 
 export default function EditorMainArea() {
-  const layoutProps = useContext(EditorLayoutContext);
+  const [
+    outputAreaHeight,
+    outputAreaMinHeight,
+    requestAreaMinHeight,
+    setOutputAreaHeight,
+  ] = useEditorPropStore(
+    useShallow((state) => [
+      state.mainArea.outputArea.height,
+      state.mainArea.outputArea.minHeight,
+      state.mainArea.requestArea.minHeight,
+      state.setOutputAreaHeight,
+    ])
+  );
+
   const centerDiv = useRef<HTMLDivElement>(null);
 
   function onDrag(_: number, y: number) {
-    if (!centerDiv.current || !layoutProps) return;
+    if (!centerDiv.current) return;
 
     const totalHeight = centerDiv.current.clientHeight;
     y = totalHeight - y + centerDiv.current.offsetTop;
 
-    if (y < layoutProps.current.mainArea.outputArea.minHeight) {
-      y = layoutProps.current.mainArea.outputArea.minHeight;
+    if (y < outputAreaMinHeight) {
+      y = outputAreaMinHeight;
     }
 
     const maxHeight =
-      totalHeight -
-      (layoutProps.current.mainArea.outputArea.minHeight +
-        layoutProps.current.mainArea.requestArea.minHeight);
+      totalHeight - (outputAreaMinHeight + requestAreaMinHeight);
 
     if (y > maxHeight) {
       y = maxHeight;
     }
 
-    layoutProps.current.mainArea.outputArea.height = y;
-    centerDiv.current.style.gridTemplateRows = `auto ${layoutProps.current.mainArea.outputArea.height}px`;
+    setOutputAreaHeight(y);
+    centerDiv.current.style.gridTemplateRows = `auto ${outputAreaHeight}px`;
   }
-
 
   useEffect(() => {
     onDrag(0, 10000);
-  }, [])
+  }, []);
 
   return (
     <div ref={centerDiv} className="editor-main">

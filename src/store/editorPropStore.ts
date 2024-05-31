@@ -43,13 +43,13 @@ export const useEditorPropStore = create<{
   };
 
   setSize(width: number, height: number): void;
-  setHeaderHeight(height: number): void;
   setLeftSidebarWidth(width: number): void;
   setRightSidebarWidth(width: number): void;
   setOutputAreaHeight(height: number): void;
   setOpenedLeftSidebarPanel(panel: PanelType): void;
   setOpenedRightSidebarPanel(panel: PanelType): void;
 }>((set) => ({
+
   size: {
     width: 0,
     height: 0,
@@ -85,10 +85,12 @@ export const useEditorPropStore = create<{
   },
 
   setSize: (width, height) => set(() => ({ size: { width, height } })),
-  setHeaderHeight: (height) => set(() => ({ header: { height } })),
 
   setLeftSidebarWidth: (width) =>
-    set((state) => ({ leftSidebar: { ...state.leftSidebar, width } })),
+    set((state) => {
+      console.log(width)
+      return { leftSidebar: { ...state.leftSidebar, width } }
+    }),
 
   setRightSidebarWidth: (width) =>
     set((state) => ({ rightSidebar: { ...state.rightSidebar, width } })),

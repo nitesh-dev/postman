@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import "../../styles/line-dragger.css";
 
 export default function LineDragger({
@@ -12,23 +12,26 @@ export default function LineDragger({
   isDisabled: boolean;
   isLtr: boolean;
 }) {
-  const isDown = useRef(false);
 
-  function onMouseMove(e: MouseEvent) {
+
+  const isDown = useRef(false);
+  function onMouseMove(e: MouseEvent){
     if (!isDown.current) return;
     onMove(e.clientX, e.clientY);
   }
 
-  function onMouseUp() {
+  const onMouseUp = useCallback(() => {
     isDown.current = false;
-  }
+  }, []);
 
-  function onMouseDown() {
+  const onMouseDown = useCallback(() => {
     isDown.current = true;
-  }
+  }, []);
 
   useEffect(() => {
-    document.body.addEventListener("mousemove", onMouseMove);
+    document.body.addEventListener("mousemove", (e) => {
+      onMouseMove(e);
+    });
     document.body.addEventListener("mouseup", onMouseUp);
     return () => {
       document.body.removeEventListener("mousemove", onMouseMove);

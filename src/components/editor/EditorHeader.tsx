@@ -1,14 +1,15 @@
-import { useContext } from "react";
+
 import "../../styles/editor/editor-header.css";
-import { EditorLayoutContext } from "../../pages/Editor";
+import { useEditorPropStore } from "../../store/editorPropStore";
+import { useShallow } from "zustand/react/shallow";
+
 export default function EditorHeader() {
-  const layoutProps = useContext(EditorLayoutContext);
+  const [headerHeight] = useEditorPropStore(
+    useShallow((state) => [state.header.height])
+  );
 
   return (
-    <div
-      className="editor-header"
-      style={{ height: layoutProps?.current.header.height }}
-    >
+    <div className="editor-header" style={{ height: headerHeight }}>
       <p>Hello header</p>
     </div>
   );
