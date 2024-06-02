@@ -1,0 +1,56 @@
+.icon-bar {
+  padding: 0.5rem 0;
+  width: 48px;
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+}
+
+.icon-bar.right {
+  border-right: none;
+  border-left: 1px solid var(--color-border);
+}
+.icon-bar button.btn {
+  width: 48px !important;
+  height: 48px !important;
+  background-color: transparent;
+  border-radius: 0 !important;
+  position: relative;
+  border: 1px solid transparent;
+  border-left: none;
+  border-radius: none;
+}
+
+.icon-bar button.active,
+.icon-bar button:hover {
+  /* background-color: var(--color-primary); */
+  background-color: var(--color-surface-variant);
+  fill: var(--color-primary);
+}
+
+.icon-bar button.active {
+  border-color: var(--color-border);
+}
+
+.icon-bar button.active::after {
+  content: "";
+  width: 4px;
+  height: 100%;
+  background-color: var(--color-surface-variant);
+  position: absolute;
+  top: 0;
+  right: -3px;
+}
+
+.icon-bar.right button.active::after {
+  left: -3px;
+  right: unset;
+}
+
+.icon-bar button svg {
+  fill: inherit;
+  width: 24px;
+  height: auto;
+}

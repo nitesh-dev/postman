@@ -1,6 +1,11 @@
 
 /* editor header */
 .editor .editor-header {
-    height: 40px;
+    height: 40px !important;
+    display: flex;
+    align-items: center;
+    overflow: auto;
     border-bottom: 1px solid var(--color-border);
+    margin: 0;
+    padding: 0;
   }

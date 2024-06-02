@@ -42,8 +42,7 @@ span {
   color: var(--color-on-surface);
 }
 
-
-svg{
+svg {
   fill: inherit;
 }
 
@@ -90,3 +89,4 @@ button.btn.secondary {
   color: var(--color-on-secondary);
   fill: var(--color-on-secondary);
 }
+

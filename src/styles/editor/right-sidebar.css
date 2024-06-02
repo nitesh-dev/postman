@@ -1,15 +1,7 @@
 /* editor right sidebar */
 .editor .right-sidebar {
-    position: relative;
-    width: 100%;
-    background-color: var(--color-surface-variant);
-    height: 100%;
-    display: grid;
-    grid-template-columns: auto max-content;
-    /* border-left: 1px solid var(--color-border); */
-  }
-  
-  .editor .right-sidebar .icon-bar {
-    width: 40px;
-    border-left: 1px solid var(--color-border);
-  }
+  position: relative;
+  width: 100%;
+  background-color: var(--color-surface-variant);
+  height: 100%;
+}

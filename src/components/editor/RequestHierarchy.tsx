@@ -7,7 +7,7 @@ import PatchIcon from "../../assets/icons/PATCH.svg";
 import DeleteIcon from "../../assets/icons/DELETE.svg";
 import OptionsIcon from "../../assets/icons/OPTIONS.svg";
 import HeadIcon from "../../assets/icons/HEAD.svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getUniqueId } from "../../extra/utils";
 
 export enum ChildType {
@@ -324,6 +324,25 @@ export default function RequestHierarchy() {
     },
   ]);
 
+  useEffect(() => {
+    updateSize();
+
+    window.addEventListener("resize", updateSize);
+
+    return () => {
+      window.removeEventListener("resize", updateSize);
+    };
+  }, []);
+
+  function updateSize() {
+    if (!hierarchyRef.current) return;
+
+    console.log(window.innerHeight, hierarchyRef.current.offsetTop);
+
+    let height = window.innerHeight - hierarchyRef.current.offsetTop - 25 - 41; // footer height & header height
+    hierarchyRef.current.style.height = height + "px";
+  }
+
   function updateHierarchy(
     id: string,
     tree: Tree[],
@@ -411,7 +430,11 @@ export default function RequestHierarchy() {
     ));
   }
   return (
-    <div ref={hierarchyRef} id="request-hierarchy" className="request-hierarchy">
+    <div
+      ref={hierarchyRef}
+      id="request-hierarchy"
+      className="request-hierarchy"
+    >
       <div>{renderTree(hierarchy, 0)}</div>
     </div>
   );
