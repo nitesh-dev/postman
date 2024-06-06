@@ -1,5 +1,5 @@
 import CollectionIcon from "../icon/CollectionIcon";
-import "../../styles/editor/icon-tab-bar.css";
+import "@/styles/editor/icon-tab-bar.css";
 
 export default function IconTabBar({ isRight }: { isRight: boolean }) {
   return (

@@ -1,4 +1,4 @@
-import "../../styles/editor/editor-request-tab.css";
+import "@/styles/editor/editor-request-tab.css";
 import postIcon from "../../assets/icons/POST.svg";
 import CloseIcon from "../icon/CloseIcon";
 

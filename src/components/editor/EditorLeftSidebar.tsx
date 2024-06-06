@@ -1,4 +1,4 @@
-import "../../styles/editor/left-sidebar.css";
+import "@/styles/editor/left-sidebar.css";
 import SearchBar from "../widget/SearchBar";
 import RequestHierarchy from "./RequestHierarchy";
 import { PanelType, useEditorPropStore } from "../../store/editorPropStore";

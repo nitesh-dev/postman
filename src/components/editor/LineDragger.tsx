@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
-import "../../styles/line-dragger.css";
+import "../@/styles/line-dragger.css";
 
 export default function LineDragger({
   isVertical,

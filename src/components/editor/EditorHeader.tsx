@@ -1,4 +1,4 @@
-import "../../styles/editor/editor-header.css";
+import "@/styles/editor/editor-header.css";
 import { useEditorPropStore } from "../../store/editorPropStore";
 import { useShallow } from "zustand/react/shallow";
 

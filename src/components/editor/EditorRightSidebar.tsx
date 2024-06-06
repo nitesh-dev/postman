@@ -1,4 +1,4 @@
-import "../../styles/editor/right-sidebar.css";
+import "../@/styles/editor/right-sidebar.css";
 import { useContext } from "react";
 import { useEditorPropStore } from "../../store/editorPropStore";
 import { useShallow } from "zustand/react/shallow";

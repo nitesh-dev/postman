@@ -1,9 +1,9 @@
-import EditorFooter from "../components/editor/EditorFooter";
-import EditorHeader from "../components/editor/EditorHeader";
-import EditorLeftSidebar from "../components/editor/EditorLeftSidebar";
-import "../styles/editor.css";
-import EditorMainArea from "../components/editor/EditorMainArea";
-import EditorRightSidebar from "../components/editor/EditorRightSidebar";
+import EditorFooter from "@/components/editor/EditorFooter";
+import EditorHeader from "@/components/editor/EditorHeader";
+import EditorLeftSidebar from "@/components/editor/EditorLeftSidebar";
+import "@/styles/editor.css";
+import EditorMainArea from "@/components/editor/EditorMainArea";
+import EditorRightSidebar from "@/components/editor/EditorRightSidebar";
 import Split from "react-split";
 import IconTabBar from "@/components/editor/IconTabBar";
 

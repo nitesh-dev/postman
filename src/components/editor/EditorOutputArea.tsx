@@ -1,4 +1,4 @@
-import "../../styles/editor/output-area.css"
+import "@/styles/editor/output-area.css"
 
 export default function EditorOutputArea() {
   return (
