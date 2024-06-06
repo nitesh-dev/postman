@@ -20,7 +20,7 @@
   --color-surface-variant: #f7f7f7;
   --color-surface-variant-dark: #e0e0e0;
   --color-border: #e6e6e6;
-  --medium-font: 14px;
+  --medium-font: 13px;
   --border-radius: 4px;
   --color-on-surface: #222222;
 }
@@ -37,7 +37,8 @@ a,
 p,
 li,
 button,
-span {
+div,
+span, input, select, option, textarea{
   font-size: var(--medium-font);
   color: var(--color-on-surface);
 }

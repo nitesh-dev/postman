@@ -1,12 +1,10 @@
 import "../../styles/editor/request-area.css"
+import EditorRequestTab from "./EditorRequestTab"
 
 export default function EditorRequestArea() {
   return (
     <div className="editor-request-area">
-      <div className="tabs">
-        <div className="tab-item">hello Tab</div>
-        <div className="tab-item">hello Tab</div>
-      </div>
+      <EditorRequestTab/>
 
       <div className="request-content-area">
         <p>hello request content</p>
