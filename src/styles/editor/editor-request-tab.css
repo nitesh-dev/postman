@@ -38,6 +38,7 @@
     opacity: 1;
 }
 
+
 .editor-request-tab .tab-item button:hover{
     background-color: var(--color-surface-variant);
 }

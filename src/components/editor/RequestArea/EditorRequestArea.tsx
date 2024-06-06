@@ -1,5 +1,5 @@
-import "../../styles/editor/request-area.css"
-import EditorRequestTab from "./EditorRequestTab"
+import "../../../styles/editor/request-area.css"
+import EditorRequestTab from "../EditorRequestTab"
 
 export default function EditorRequestArea() {
   return (

@@ -5,7 +5,7 @@ import "../styles/editor.css";
 import EditorMainArea from "../components/editor/EditorMainArea";
 import EditorRightSidebar from "../components/editor/EditorRightSidebar";
 import Split from "react-split";
-import IconTabBar from "../components/editor/IconTabBar";
+import IconTabBar from "@/components/editor/IconTabBar";
 
 export default function EditorLayout() {
   return (
@@ -13,10 +13,10 @@ export default function EditorLayout() {
       <EditorHeader />
       <div className="editor-area">
         <IconTabBar isRight={false} />
-        <Split minSize={300} className="split" gutterSize={1}>
+        <Split sizes={[20, 80]} minSize={300} className="split" gutterSize={1}>
           <EditorLeftSidebar />
           <EditorMainArea />
-          <EditorRightSidebar />
+          {/* {false && <EditorRightSidebar />} */}
         </Split>
         <IconTabBar isRight={true} />
       </div>

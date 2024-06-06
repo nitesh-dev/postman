@@ -1,5 +1,5 @@
 import EditorOutputArea from "./EditorOutputArea";
-import EditorRequestArea from "./EditorRequestArea";
+import EditorRequestArea from "./RequestArea/EditorRequestArea";
 import Split from "react-split";
 
 export default function EditorMainArea() {
