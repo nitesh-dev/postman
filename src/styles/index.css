@@ -20,6 +20,7 @@
   --color-surface-variant: #f7f7f7;
   --color-surface-variant-dark: #e0e0e0;
   --color-border: #e6e6e6;
+  --avg-font: 15px;
   --medium-font: 13px;
   --border-radius: 4px;
   --color-on-surface: #222222;
@@ -38,7 +39,11 @@ p,
 li,
 button,
 div,
-span, input, select, option, textarea{
+span,
+input,
+select,
+option,
+textarea {
   font-size: var(--medium-font);
   color: var(--color-on-surface);
 }
@@ -90,4 +95,3 @@ button.btn.secondary {
   color: var(--color-on-secondary);
   fill: var(--color-on-secondary);
 }
-

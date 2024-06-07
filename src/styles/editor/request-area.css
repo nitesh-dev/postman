@@ -1,1 +1,50 @@
 /* editor request area */
+.request-content-area{
+    margin: 1rem;
+    margin-top: 0;
+}
+
+
+/* request input box  */
+.request-input-box {
+    display: grid;
+    grid-template-columns: auto max-content;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+
+.request-input-box .input-area{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid rgb(153, 153, 153);
+    border-radius: var(--border-radius);
+}
+
+.request-input-box .input-area span{
+    display: block;
+    height: 24px;
+    width: 1px;
+    background-color: var(--color-border);
+}
+
+.request-input-box .input-area input, .request-input-box .input-area select{
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    height: 40px;
+    padding: 0 1em;
+}
+
+.request-input-box .input-area input{
+    width: 100%;
+}
+
+.request-input-box button{
+    height: 40px;
+    padding: 0 1.5em !important;
+    font-weight: 600;
+    font-size: var(--avg-font);
+}
