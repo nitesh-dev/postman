@@ -1,3 +1,13 @@
-export default function TabPanel({ children }: { children: React.ReactNode }) {
-  return <div className="tab-panel">{children}</div>;
+import { useContext } from "react";
+import { TabListContext } from "./TabListContext";
+
+export default function TabPanel({
+  children,
+  activeId,
+}: {
+  children: React.ReactNode;
+  activeId: string;
+}) {
+  const { activeTab } = useContext(TabListContext);
+  return activeTab === activeId || !activeId ? <div>{children}</div> : null;
 }

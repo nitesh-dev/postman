@@ -1,11 +1,36 @@
 import "@/styles/widgets/tab-list.css";
 
-export default function TabList() {
+export interface TabListItem {
+  name: string;
+  value: string;
+  isChanges?: boolean;
+}
+
+export default function TabList({
+  items,
+  active,
+  onTabChange,
+}: {
+  items: TabListItem[];
+  active: string;
+  onTabChange: (value: string) => void;
+}) {
+
   return (
     <div className="tab-list">
-      <div className="active changes">Tab1</div>
-      <div className="changes">Tab2</div>
-      <div>Tab3</div>
+      {items.map((item, index) => (
+        <div
+          onClick={() => onTabChange(item.value)}
+          data-value={item.value}
+          key={index}
+          className={
+            (item.isChanges ? "changes" : "") +
+            (item.value === active ? " active" : "")
+          }
+        >
+          {item.name}
+        </div>
+      ))}
     </div>
   );
 }
