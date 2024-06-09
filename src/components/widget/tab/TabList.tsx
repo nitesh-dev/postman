@@ -1,4 +1,4 @@
-import "@/styles/widgets/tab-list.css";
+
 
 export interface TabListItem {
   name: string;

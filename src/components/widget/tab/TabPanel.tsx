@@ -9,5 +9,5 @@ export default function TabPanel({
   activeId: string;
 }) {
   const { activeTab } = useContext(TabListContext);
-  return activeTab === activeId || !activeId ? <div>{children}</div> : null;
+  return activeTab === activeId || !activeId ? <div className="tab-panel">{children}</div> : null;
 }
