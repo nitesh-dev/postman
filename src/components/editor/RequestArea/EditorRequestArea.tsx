@@ -6,6 +6,11 @@ import TabList, { TabListItem } from "@/components/widget/tab/TabList";
 import TabPanel from "@/components/widget/tab/TabPanel";
 import TabListContext from "@/components/widget/tab/TabListContext";
 import Table from "@/components/widget/Table";
+import { RadioGroupData } from "@/components/widget/radioGroup/RadioGroupTab";
+import RadioGroupContainer, {
+  RadioGroupContext,
+} from "@/components/widget/radioGroup/RadioGroupContext";
+import RadioPanel from "@/components/widget/radioGroup/RadioPanel";
 
 const requestTabItems: TabListItem[] = [
   {
@@ -31,6 +36,21 @@ const requestTabItems: TabListItem[] = [
   },
 ];
 
+const bodyItems: RadioGroupData[] = [
+  {
+    key: "none",
+    value: "None",
+  },
+  {
+    key: "form-data",
+    value: "Form Data",
+  },
+  {
+    key: "raw",
+    value: "Raw",
+  },
+];
+
 const tableData = [
   ["name", "Nitesh", "This is the name of the user"],
   ["age", "23", "This is the age of the user"],
@@ -52,8 +72,19 @@ export default function EditorRequestArea() {
             />
           </TabPanel>
           <TabPanel activeId="authorization">Hello tab panel 2</TabPanel>
-          <TabPanel activeId="headers">Hello tab panel 3</TabPanel>
-          <TabPanel activeId="body">Hello tab panel 4</TabPanel>
+          <TabPanel activeId="headers">
+            <Table
+              headers={["Key", "Value", "Description"]}
+              tableData={tableData}
+            />
+          </TabPanel>
+          <TabPanel activeId="body">
+            <RadioGroupContainer initialActive="none" radioItems={bodyItems}>
+              <RadioPanel activeId="none">No data to pass</RadioPanel>
+              <RadioPanel activeId="form-data">form</RadioPanel>
+              <RadioPanel activeId="raw">body</RadioPanel>
+            </RadioGroupContainer>
+          </TabPanel>
         </TabListContext>
       </div>
     </div>
