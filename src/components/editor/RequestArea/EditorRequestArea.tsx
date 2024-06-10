@@ -81,7 +81,12 @@ export default function EditorRequestArea() {
           <TabPanel activeId="body">
             <RadioGroupContainer initialActive="none" radioItems={bodyItems}>
               <RadioPanel activeId="none">No data to pass</RadioPanel>
-              <RadioPanel activeId="form-data">form</RadioPanel>
+              <RadioPanel activeId="form-data">
+                <Table
+                  headers={["Key", "Value", "Description"]}
+                  tableData={tableData}
+                />
+              </RadioPanel>
               <RadioPanel activeId="raw">body</RadioPanel>
             </RadioGroupContainer>
           </TabPanel>

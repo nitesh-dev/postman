@@ -3,6 +3,10 @@
   border-bottom: 1px solid var(--color-border);
   display: flex;
   align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-surface);
+  z-index: 100;
 }
 
 .editor-request-tab .tab-item{
@@ -50,7 +54,7 @@
 }
 
 .editor-request-tab .tab-item.active{
-    border-bottom-color: var(--color-primary);
+    border-bottom-color: var(--color-secondary);
 }
 
 .editor-request-tab .tab-item img{

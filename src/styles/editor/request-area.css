@@ -4,6 +4,10 @@
     margin-top: 0;
 }
 
+.editor-request-area{
+    overflow-y: auto;
+}
+
 
 /* request input box  */
 .request-input-box {
