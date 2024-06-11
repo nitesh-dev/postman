@@ -11,6 +11,7 @@ import RadioGroupContainer, {
   RadioGroupContext,
 } from "@/components/widget/radioGroup/RadioGroupContext";
 import RadioPanel from "@/components/widget/radioGroup/RadioPanel";
+import CodeEditor from "@/components/widget/CodeEditor";
 
 const requestTabItems: TabListItem[] = [
   {
@@ -87,7 +88,9 @@ export default function EditorRequestArea() {
                   tableData={tableData}
                 />
               </RadioPanel>
-              <RadioPanel activeId="raw">body</RadioPanel>
+              <RadioPanel activeId="raw">
+                <CodeEditor />
+              </RadioPanel>
             </RadioGroupContainer>
           </TabPanel>
         </TabListContext>

@@ -4,7 +4,7 @@ import Split from "react-split";
 
 export default function EditorMainArea() {
   return (
-    <Split gutterSize={1} className="split editor-main" direction="vertical">
+    <Split gutterSize={1} id="main-area-splitter" className="split editor-main" direction="vertical">
       <EditorRequestArea />
       <EditorOutputArea />
     </Split>
