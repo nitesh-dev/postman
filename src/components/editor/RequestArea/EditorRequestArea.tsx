@@ -4,7 +4,6 @@ import BreadCrumb from "./BreadCrumb";
 import RequestInputBox from "./RequestInputBox";
 import TabList, { TabListItem } from "@/components/widget/tab/TabList";
 import TabPanel from "@/components/widget/tab/TabPanel";
-import TabListContext from "@/components/widget/tab/TabListContext";
 import Table from "@/components/widget/Table";
 import { RadioGroupData } from "@/components/widget/radioGroup/RadioGroupTab";
 import RadioGroupContainer, {
@@ -12,6 +11,7 @@ import RadioGroupContainer, {
 } from "@/components/widget/radioGroup/RadioGroupContext";
 import RadioPanel from "@/components/widget/radioGroup/RadioPanel";
 import CodeEditor from "@/components/widget/CodeEditor";
+import TabListContainer from "@/components/widget/tab/TabListContext";
 
 const requestTabItems: TabListItem[] = [
   {
@@ -65,7 +65,7 @@ export default function EditorRequestArea() {
 
       <div className="request-content-area">
         <RequestInputBox />
-        <TabListContext initialActive="params" tabItems={requestTabItems}>
+        <TabListContainer initialActive="params" tabItems={requestTabItems}>
           <TabPanel activeId="params">
             <Table
               headers={["Key", "Value", "Description"]}
@@ -93,7 +93,7 @@ export default function EditorRequestArea() {
               </RadioPanel>
             </RadioGroupContainer>
           </TabPanel>
-        </TabListContext>
+        </TabListContainer>
       </div>
     </div>
   );

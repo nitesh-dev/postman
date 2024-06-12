@@ -15,7 +15,8 @@
   --color-primary: #5499e7;
   --color-on-primary: #ffffff;
   --color-secondary: #ff0080;
-  --color-success: #00d1b2;
+  --color-success: #1bb35f;
+  --color-error: #ff3860;
   --color-on-secondary: #ffffff;
   --color-surface: #ffffff;
   --color-surface-variant: #f7f7f7;
@@ -23,8 +24,10 @@
   --color-border: #e6e6e6;
   --avg-font: 15px;
   --medium-font: 13px;
+  --small-font: 12px;
   --border-radius: 4px;
   --color-on-surface: #222222;
+  --color-on-surface-light: #5c5c5c;
 }
 
 * {

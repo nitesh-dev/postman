@@ -19,6 +19,7 @@
     grid-template-columns: auto max-content;
     gap: 0.5rem;
     align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 

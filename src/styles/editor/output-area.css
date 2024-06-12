@@ -1,7 +1,38 @@
 /* editor output area */
 .editor-output-area {
-    position: relative;
-    display: grid;
-    grid-template-rows: max-content auto;
-  }
-  
+  position: relative;
+  display: grid;
+  grid-template-rows: max-content auto;
+}
+
+.editor-output-area .inner{
+  margin: 0 1rem;
+}
+
+.editor-output-area .status-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+  top: 0.2rem;
+  right: 1rem;
+  background-color: var(--color-surface-variant);
+  padding: 0.2em 0.5em;
+  border-radius: var(--border-radius);
+}
+
+.editor-output-area .status-bar .status-item {
+  color: var(--color-on-surface-light);
+}
+
+.editor-output-area .status-bar .status-item span.success {
+  color: var(--color-success);
+}
+
+.editor-output-area .status-bar .status-item span.error {
+  color: var(--color-error);
+}
+
+.editor-output-area .status-bar * {
+  font-size: var(--small-font) !important;
+}
