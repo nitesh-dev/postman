@@ -42,7 +42,7 @@ export default function EditorOutputArea() {
           </div>
         </div>
 
-        <TabListContainer initialActive="body" tabItems={footerTabItems}>
+        <TabListContainer initialActive="headers" tabItems={footerTabItems}>
           <TabPanel activeId="body">
             <CodeEditor />
           </TabPanel>

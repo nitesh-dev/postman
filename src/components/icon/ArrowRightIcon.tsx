@@ -1,10 +1,12 @@
 export default function ArrowRightIcon({
   style,
+  className
 }: {
   style?: React.CSSProperties;
+  className?: string;
 }) {
   return (
-    <svg className="icon-arrow"
+    <svg className={className}
       style={style}
       width="24"
       height="24"

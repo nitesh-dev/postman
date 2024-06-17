@@ -9,6 +9,8 @@ import OptionsIcon from "../../assets/icons/OPTIONS.svg";
 import HeadIcon from "../../assets/icons/HEAD.svg";
 import { useEffect, useRef, useState } from "react";
 import { getUniqueId } from "../../extra/utils";
+import MoreHoriIcon from "../icon/MoreHoriIcon";
+import ContextMenu, { Vector2 } from "../widget/ContextMenu";
 
 export enum ChildType {
   Folder,
@@ -29,6 +31,23 @@ export interface Tree {
   isOpen?: boolean;
   children?: Tree[];
 }
+
+const folderContextMenuItems = [
+  "Add Folder",
+  "Add Request",
+  "Duplicate",
+  "Cut",
+  "Paste",
+  "Rename",
+  "Delete",
+];
+const requestContextMenuItems = [
+  "Open",
+  "Duplicate",
+  "Cut",
+  "Rename",
+  "Delete",
+];
 
 export default function RequestHierarchy() {
   const hierarchyRef = useRef<HTMLDivElement>(null);
@@ -324,6 +343,27 @@ export default function RequestHierarchy() {
     },
   ]);
 
+  // context menu
+  const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
+  const [contextMenuPos, setContextMenuPos] = useState<Vector2>({ x: 0, y: 0 });
+  const [selectedTreeId, setSelectedTreeId] = useState("");
+  const [contextMenuItem, setContextMenuItem] = useState<string[]>([]);
+
+  function onMoreClick(e: React.MouseEvent, item: Tree) {
+    setContextMenuItem(
+      item.type === ChildType.Folder
+        ? folderContextMenuItems
+        : requestContextMenuItems
+    );
+    setSelectedTreeId(item.id);
+    setIsContextMenuOpen(true);
+    setContextMenuPos({ x: e.clientX, y: e.clientY });
+  }
+
+  function onContextMenuSelect(item: string) {
+    setIsContextMenuOpen(false);
+  }
+
   useEffect(() => {
     updateSize();
 
@@ -391,10 +431,14 @@ export default function RequestHierarchy() {
     setHierarchy([...hierarchy]);
   }
 
-  function onClick(hierarchy: Tree) {
+  function onItemClick(hierarchy: Tree, target: HTMLElement) {
+    if(target.classList.contains("right")) return;
+    
     if (hierarchy.type === ChildType.Folder) {
       toggleHierarchy(hierarchy);
     }
+
+    setSelectedTreeId(hierarchy.id);
   }
 
   function renderTree(hierarchy: Tree[], times: number) {
@@ -402,19 +446,25 @@ export default function RequestHierarchy() {
       <div className="item" key={index}>
         <div
           className={
-            "item-header" + (item.type == ChildType.Folder ? " folder" : "")
+            "item-header" +
+            (item.type == ChildType.Folder ? " folder" : "") +
+            (selectedTreeId === item.id ? " active" : "")
           }
           style={{ paddingLeft: times * 2 + 1 + "rem" }}
-          onClick={() => onClick(item)}
+          onClick={(e) => onItemClick(item, e.target as HTMLElement)}
         >
           {item.type == ChildType.Folder ? (
-            <ArrowRightIcon />
+            <ArrowRightIcon
+              className={"icon-arrow" + (item.isOpen ? " open" : "")}
+            />
           ) : (
             <div className="indent"></div>
           )}
           {getIcon(item.type)}
           <input type="text" disabled value={item.name} />
-          <div className="right"></div>
+          <div className="right" onClick={(e) => onMoreClick(e, item)}>
+            <MoreHoriIcon />
+          </div>
         </div>
 
         {item.children && item.isOpen && (
@@ -436,6 +486,13 @@ export default function RequestHierarchy() {
       className="request-hierarchy"
     >
       <div>{renderTree(hierarchy, 0)}</div>
+      <ContextMenu
+        items={contextMenuItem}
+        onSelect={onContextMenuSelect}
+        open={isContextMenuOpen}
+        setOpen={setIsContextMenuOpen}
+        pos={contextMenuPos}
+      />
     </div>
   );
 }
