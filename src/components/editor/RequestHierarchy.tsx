@@ -68,16 +68,18 @@ export default function RequestHierarchy() {
     addFolder,
     toggleFolder,
     addRequest,
-    duplicateFolder,
+    duplicateItem,
     renameItem,
+    deleteItem,
   ] = useWorkspaceStore(
     useShallow((state) => [
       state.local.collections,
       state.addFolder,
       state.toggleFolder,
       state.addRequest,
-      state.duplicateFolder,
+      state.duplicateItem,
       state.renameItem,
+      state.deleteItem,
     ])
   );
 
@@ -126,7 +128,7 @@ export default function RequestHierarchy() {
           addRequest(selectedTreeId);
           break;
         case "Duplicate":
-          duplicateFolder(selectedTreeId);
+          duplicateItem(selectedTreeId);
           break;
         case "Cut":
           break;
@@ -137,16 +139,17 @@ export default function RequestHierarchy() {
           makeActiveRenameInput(selectedTreeId);
           break;
         case "Delete":
+          deleteItem(selectedTreeId);
           break;
         default:
           break;
       }
     } else {
-
       switch (item) {
         case "Open":
           break;
         case "Duplicate":
+          duplicateItem(selectedTreeId);
           break;
         case "Cut":
           break;
@@ -155,6 +158,7 @@ export default function RequestHierarchy() {
           makeActiveRenameInput(selectedTreeId);
           break;
         case "Delete":
+          deleteItem(selectedTreeId);
           break;
         default:
           break;

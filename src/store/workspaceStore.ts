@@ -4,6 +4,7 @@ import {
   TreeCollection,
 } from "@/components/editor/RequestHierarchy";
 import { getUniqueId } from "@/extra/utils";
+import { WritableDraft } from "immer";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -24,7 +25,7 @@ type Actions = {
   addFolder(folderId: string): string;
   toggleFolder(folderId: string): void;
   addRequest(folderId: string): string;
-  duplicateFolder(folderId: string): void;
+  duplicateItem(itemId: string): void;
   renameItem(itemId: string, newName: string): void;
   deleteItem(itemId: string): void;
 };
@@ -63,7 +64,7 @@ export const useWorkspaceStore = create<State & Actions>()(
         },
         {
           id: getUniqueId(),
-          name: "My Collection2",
+          name: "My Collection3",
           type: 0,
           children: [],
           isOpen: false,
@@ -125,32 +126,45 @@ export const useWorkspaceStore = create<State & Actions>()(
     },
 
     // TODO fix duplicate folder later
-    duplicateFolder: (folderId) => {
+    duplicateItem: (itemId) => {
       set((state) => {
-        let parentItem = findParentTreeItem(state.local.collections, folderId);
-        if (parentItem && parentItem.children) {
-          // duplicate the folder
-          let duplicate = duplicateFolder(parentItem);
-          parentItem.children.push(duplicate as Tree);
-          parentItem.isOpen = true;
-        } else {
-          let collectionItem = findTreeItem(state.local.collections, folderId);
+        let { parent, childIndex } = findParentTreeItem(
+          state.local.collections,
+          itemId
+        );
 
-          if (collectionItem) {
-            // duplicate the collection
-            let duplicate = duplicateFolder(collectionItem);
-            state.local.collections.push(duplicate as TreeCollection);
-            collectionItem.isOpen = true;
-          }
+        if (childIndex === -1) return;
+
+        if (parent) {
+          let child = parent.children!![childIndex];
+          let duplicate = duplicateItem(child);
+
+          parent.children!!.push(duplicate as Tree);
+          parent.isOpen = true;
+        } else {
+          // duplicate the collection
+          let child = state.local.collections[childIndex];
+          let duplicate = duplicateItem(child);
+          duplicate.isOpen = true;
+          state.local.collections.push(duplicate as TreeCollection);
         }
       });
     },
 
     deleteItem: (itemId) => {
       set((state) => {
-        let treeItem = findTreeItem(state.local.collections, itemId);
-        if (treeItem) {
-          treeItem.isOpen = !treeItem.isOpen;
+        let { parent, childIndex } = findParentTreeItem(
+          state.local.collections,
+          itemId
+        );
+
+        if (childIndex === -1) return;
+
+        if (parent) {
+          parent.children!!.splice(childIndex, 1);
+        } else {
+          let collections = state.local.collections;
+          collections.splice(childIndex, 1);
         }
       });
     },
@@ -166,14 +180,13 @@ export const useWorkspaceStore = create<State & Actions>()(
   }))
 );
 
-function duplicateFolder(item: Tree | TreeCollection): Tree | TreeCollection {
-  let duplicate = structuredClone(item);
-  duplicate.id = getUniqueId();
+function duplicateItem(item: Tree | TreeCollection): Tree | TreeCollection {
+  let duplicate = { ...item, id: getUniqueId() };
 
-  if (duplicate.children) {
-    for (const child of duplicate.children) {
-      duplicateFolder(child);
-    }
+  if (item.children) {
+    duplicate.children = item.children.map((child) =>
+      duplicateItem(child)
+    ) as typeof item.children;
   }
 
   return duplicate;
@@ -195,12 +208,20 @@ function findParentTreeItem(
   items: Tree[] | TreeCollection[],
   id: string,
   parent: Tree | TreeCollection | null = null
-): Tree | TreeCollection | null {
-  for (const item of items) {
-    if (item.id === id) return parent;
-    parent = item;
-    const foundItem = findParentTreeItem(parent.children || [], id, parent);
-    if (foundItem) return foundItem;
+): {
+  parent: Tree | TreeCollection | null;
+  childIndex: number;
+} {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    if (item.id === id)
+      return {
+        parent: parent,
+        childIndex: i,
+      };
+    let _parent = item;
+    const foundItem = findParentTreeItem(_parent.children || [], id, _parent);
+    if (foundItem.parent && foundItem.childIndex != -1) return foundItem;
   }
-  return null;
+  return { parent: null, childIndex: -1 };
 }
