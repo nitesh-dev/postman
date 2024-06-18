@@ -62,302 +62,22 @@ const requestContextMenuItems = [
 
 export default function RequestHierarchy() {
   const hierarchyRef = useRef<HTMLDivElement>(null);
-  // const [collections, setCollections] = useState<TreeCollection[]>([
-  //   {
-  //     id: getUniqueId(),
-  //     name: "hello collection",
-  //     type: ChildType.Collection,
-  //     isOpen: true,
-  //     children: [
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Request 1",
-  //         isFav: true,
-  //         type: ChildType.Post,
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Request 1",
-  //         isFav: true,
-  //         type: ChildType.Patch,
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Request 1",
-  //         isFav: true,
-  //         type: ChildType.Delete,
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Request 1",
-  //         isFav: true,
-  //         type: ChildType.Head,
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Request 1",
-  //         isFav: true,
-  //         type: ChildType.Options,
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Folder 2",
-  //         isFav: true,
-  //         type: ChildType.Folder,
-  //         isOpen: true,
-  //         children: [],
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Folder 3",
-  //         isFav: true,
-  //         type: ChildType.Folder,
-  //         isOpen: true,
-  //         children: [
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Request 1",
-  //             isFav: true,
-  //             type: ChildType.Post,
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Request 1",
-  //             isFav: true,
-  //             type: ChildType.Patch,
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Request 1",
-  //             isFav: true,
-  //             type: ChildType.Delete,
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Request 1",
-  //             isFav: true,
-  //             type: ChildType.Head,
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Request 1",
-  //             isFav: true,
-  //             type: ChildType.Options,
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Folder 2",
-  //             isFav: true,
-  //             type: ChildType.Folder,
-  //             isOpen: true,
-  //             children: [
-  //               {
-  //                 id: getUniqueId(),
-  //                 name: "Request 1",
-  //                 isFav: true,
-  //                 type: ChildType.Post,
-  //               },
-  //               {
-  //                 id: getUniqueId(),
-  //                 name: "Request 1",
-  //                 isFav: true,
-  //                 type: ChildType.Patch,
-  //               },
-  //               {
-  //                 id: getUniqueId(),
-  //                 name: "Request 1",
-  //                 isFav: true,
-  //                 type: ChildType.Delete,
-  //               },
-  //               {
-  //                 id: getUniqueId(),
-  //                 name: "Request 1",
-  //                 isFav: true,
-  //                 type: ChildType.Head,
-  //               },
-  //               {
-  //                 id: getUniqueId(),
-  //                 name: "Request 1",
-  //                 isFav: true,
-  //                 type: ChildType.Options,
-  //               },
-  //               {
-  //                 id: getUniqueId(),
-  //                 name: "Folder 2",
-  //                 isFav: true,
-  //                 type: ChildType.Folder,
-  //                 isOpen: true,
-  //                 children: [],
-  //               },
-  //               {
-  //                 id: getUniqueId(),
-  //                 name: "Folder 3",
-  //                 isFav: true,
-  //                 type: ChildType.Folder,
-  //                 isOpen: true,
-  //                 children: [
-  //                   {
-  //                     id: getUniqueId(),
-  //                     name: "Request 1",
-  //                     isFav: true,
-  //                     type: ChildType.Post,
-  //                   },
-  //                   {
-  //                     id: getUniqueId(),
-  //                     name: "Request 1",
-  //                     isFav: true,
-  //                     type: ChildType.Patch,
-  //                   },
-  //                   {
-  //                     id: getUniqueId(),
-  //                     name: "Request 1",
-  //                     isFav: true,
-  //                     type: ChildType.Delete,
-  //                   },
-  //                   {
-  //                     id: getUniqueId(),
-  //                     name: "Request 1",
-  //                     isFav: true,
-  //                     type: ChildType.Head,
-  //                   },
-  //                   {
-  //                     id: getUniqueId(),
-  //                     name: "Request 1",
-  //                     isFav: true,
-  //                     type: ChildType.Options,
-  //                   },
-  //                   {
-  //                     id: getUniqueId(),
-  //                     name: "Folder 2",
-  //                     isFav: true,
-  //                     type: ChildType.Folder,
-  //                     isOpen: true,
-  //                     children: [],
-  //                   },
-  //                   {
-  //                     id: getUniqueId(),
-  //                     name: "Folder 3",
-  //                     isFav: true,
-  //                     type: ChildType.Folder,
-  //                     isOpen: true,
-  //                     children: [],
-  //                   },
-  //                 ],
-  //               },
-  //             ],
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Folder 3",
-  //             isFav: true,
-  //             type: ChildType.Folder,
-  //             isOpen: true,
-  //             children: [],
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Request 1",
-  //         isFav: true,
-  //         type: ChildType.Post,
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Request 1",
-  //         isFav: true,
-  //         type: ChildType.Patch,
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Request 1",
-  //         isFav: true,
-  //         type: ChildType.Delete,
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Request 1",
-  //         isFav: true,
-  //         type: ChildType.Head,
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Request 1",
-  //         isFav: true,
-  //         type: ChildType.Options,
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Folder 2",
-  //         isFav: true,
-  //         type: ChildType.Folder,
-  //         isOpen: true,
-  //         children: [],
-  //       },
-  //       {
-  //         id: getUniqueId(),
-  //         name: "Folder 3",
-  //         isFav: true,
-  //         type: ChildType.Folder,
-  //         isOpen: true,
-  //         children: [
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Request 1",
-  //             isFav: true,
-  //             type: ChildType.Post,
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Request 1",
-  //             isFav: true,
-  //             type: ChildType.Patch,
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Request 1",
-  //             isFav: true,
-  //             type: ChildType.Delete,
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Request 1",
-  //             isFav: true,
-  //             type: ChildType.Head,
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Request 1",
-  //             isFav: true,
-  //             type: ChildType.Options,
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Folder 2",
-  //             isFav: true,
-  //             type: ChildType.Folder,
-  //             isOpen: true,
-  //             children: [],
-  //           },
-  //           {
-  //             id: getUniqueId(),
-  //             name: "Folder 3",
-  //             isFav: true,
-  //             type: ChildType.Folder,
-  //             isOpen: true,
-  //             children: [],
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   },
-  // ]);
 
-  const [collections, addFolder, toggleFolder] = useWorkspaceStore(
+  const [
+    collections,
+    addFolder,
+    toggleFolder,
+    addRequest,
+    duplicateFolder,
+    renameItem,
+  ] = useWorkspaceStore(
     useShallow((state) => [
       state.local.collections,
       state.addFolder,
       state.toggleFolder,
+      state.addRequest,
+      state.duplicateFolder,
+      state.renameItem,
     ])
   );
 
@@ -365,6 +85,7 @@ export default function RequestHierarchy() {
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
   const [contextMenuPos, setContextMenuPos] = useState<Vector2>({ x: 0, y: 0 });
   const [selectedTreeId, setSelectedTreeId] = useState("");
+  const [renameItemId, setRenameItemId] = useState("");
   const [contextMenuItem, setContextMenuItem] = useState<string[]>([]);
 
   function onMoreClick(e: React.MouseEvent, item: Tree | TreeCollection) {
@@ -396,22 +117,24 @@ export default function RequestHierarchy() {
   function onContextMenuSelect(item: string) {
     setIsContextMenuOpen(false);
 
-    console.log("selected: ", item);
-
     if (isFolder(selectedTreeId, collections)) {
       switch (item) {
         case "Add Folder":
           addFolder(selectedTreeId);
           break;
         case "Add Request":
+          addRequest(selectedTreeId);
           break;
         case "Duplicate":
+          duplicateFolder(selectedTreeId);
           break;
         case "Cut":
           break;
         case "Paste":
           break;
         case "Rename":
+          setRenameItemId(selectedTreeId);
+          makeActiveRenameInput(selectedTreeId);
           break;
         case "Delete":
           break;
@@ -419,18 +142,59 @@ export default function RequestHierarchy() {
           break;
       }
     } else {
+
+      switch (item) {
+        case "Open":
+          break;
+        case "Duplicate":
+          break;
+        case "Cut":
+          break;
+        case "Rename":
+          setRenameItemId(selectedTreeId);
+          makeActiveRenameInput(selectedTreeId);
+          break;
+        case "Delete":
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  function makeActiveRenameInput(id: string) {
+    const element = document
+      .getElementById(id)
+      ?.getElementsByClassName("item-header")[0]
+      .getElementsByTagName("input")[0];
+
+    if (element) {
+      element.focus();
+      element.select();
     }
   }
 
   useEffect(() => {
     updateSize();
 
+    document.addEventListener("mouseup", onMouseUp);
+
     window.addEventListener("resize", updateSize);
 
     return () => {
       window.removeEventListener("resize", updateSize);
+      document.removeEventListener("mouseup", onMouseUp);
     };
   }, []);
+
+  function onMouseUp(event: MouseEvent) {
+    if (
+      event.target instanceof HTMLElement &&
+      event.target.className == "active"
+    )
+      return;
+    setRenameItemId("");
+  }
 
   function updateSize() {
     if (!hierarchyRef.current) return;
@@ -439,22 +203,6 @@ export default function RequestHierarchy() {
 
     let height = window.innerHeight - hierarchyRef.current.offsetTop - 25 - 41; // footer height & header height
     hierarchyRef.current.style.height = height + "px";
-  }
-
-  function updateHierarchy(
-    id: string,
-    tree: Tree[],
-    callback: (tree: Tree) => Tree
-  ) {
-    for (let i = 0; i < tree.length; i++) {
-      if (tree[i].id === id) {
-        tree[i] = { ...callback(tree[i]) };
-        return;
-      }
-      if (tree[i].children) {
-        updateHierarchy(id, tree[i].children!!, callback);
-      }
-    }
   }
 
   function getIcon(type: ChildType) {
@@ -477,35 +225,24 @@ export default function RequestHierarchy() {
         return <img src={HeadIcon} />;
 
       default:
-        return null;
+        return <span></span>;
     }
   }
 
-  // function toggleHierarchy(tree: Tree) {
-  //   updateHierarchy(tree.id, hierarchy, (item) => {
-  //     item.isOpen = !item.isOpen;
-  //     return item;
-  //   });
-  //   setHierarchy([...hierarchy]);
-  // }
-
-  function onItemClick(hierarchy: Tree, target: HTMLElement) {
+  function onItemClick(hierarchy: Tree | TreeCollection, target: HTMLElement) {
     if (target.classList.contains("right")) return;
 
-    if (hierarchy.type === ChildType.Folder) {
+    if (
+      hierarchy.type === ChildType.Folder ||
+      hierarchy.type === ChildType.Collection
+    ) {
       toggleFolder(hierarchy.id);
     }
 
     setSelectedTreeId(hierarchy.id);
   }
 
-  function onCollectionClick(collection: TreeCollection, target: HTMLElement) {
-    if (target.classList.contains("right")) return;
-    toggleFolder(collection.id);
-    setSelectedTreeId(collection.id);
-  }
-
-  function renderTree(hierarchy: Tree[], times: number) {
+  function renderTree(hierarchy: Tree[] | TreeCollection[], times: number) {
     return hierarchy.map((item, index) => (
       <div className="item" key={index}>
         <div
@@ -517,7 +254,8 @@ export default function RequestHierarchy() {
           style={{ paddingLeft: times * 2 + 1 + "rem" }}
           onClick={(e) => onItemClick(item, e.target as HTMLElement)}
         >
-          {item.type == ChildType.Folder ? (
+          {item.type == ChildType.Folder ||
+          item.type == ChildType.Collection ? (
             <ArrowRightIcon
               className={"icon-arrow" + (item.isOpen ? " open" : "")}
             />
@@ -525,7 +263,13 @@ export default function RequestHierarchy() {
             <div className="indent"></div>
           )}
           {getIcon(item.type)}
-          <input type="text" disabled value={item.name} />
+          <input
+            type="text"
+            value={item.name}
+            disabled={renameItemId != item.id}
+            className={renameItemId === item.id ? "active" : ""}
+            onChange={(e) => renameItem(item.id, e.target.value)}
+          />
           <div className="right" onClick={(e) => onMoreClick(e, item)}>
             <MoreHoriIcon />
           </div>
@@ -543,46 +287,13 @@ export default function RequestHierarchy() {
       </div>
     ));
   }
-
-  function renderCollection(collections: TreeCollection[]) {
-    return collections.map((item, index) => (
-      <div className="item" key={index}>
-        <div
-          className={
-            "item-header folder" + (selectedTreeId === item.id ? " active" : "")
-          }
-          style={{ paddingLeft: 1 + "rem" }}
-          onClick={(e) => onCollectionClick(item, e.target as HTMLElement)}
-        >
-          <ArrowRightIcon
-            className={"icon-arrow" + (item.isOpen ? " open" : "")}
-          />
-          <span></span>
-          <input type="text" disabled value={item.name} />
-          <div className="right" onClick={(e) => onMoreClick(e, item)}>
-            <MoreHoriIcon />
-          </div>
-        </div>
-
-        {item.children && item.isOpen && (
-          <div className="item-children">
-            {renderTree(item.children, 1)}
-            <span
-              className="line"
-              style={{ left: `calc(${1}rem + 10px)` }}
-            ></span>
-          </div>
-        )}
-      </div>
-    ));
-  }
   return (
     <div
       ref={hierarchyRef}
       id="request-hierarchy"
       className="request-hierarchy"
     >
-      <div>{renderCollection(collections)}</div>
+      <div>{renderTree(collections, 0)}</div>
       <ContextMenu
         items={contextMenuItem}
         onSelect={onContextMenuSelect}

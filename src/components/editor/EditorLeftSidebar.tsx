@@ -14,13 +14,13 @@ export default function EditorLeftSidebar() {
 
   return (
     <div className="left-sidebar">
-      <div className="header">
+      {/* <div className="header">
         <span>Nitesh Collection</span>
         <div className="right">
           <button className="btn outline">New</button>
           <button className="btn primary">Import</button>
         </div>
-      </div>
+      </div> */}
       <div className="content">
         {/* tab - content */}
         {activeTab == PanelType.collection && (
