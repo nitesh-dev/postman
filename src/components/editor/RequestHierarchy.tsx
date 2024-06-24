@@ -8,7 +8,6 @@ import DeleteIcon from "../../assets/icons/DELETE.svg";
 import OptionsIcon from "../../assets/icons/OPTIONS.svg";
 import HeadIcon from "../../assets/icons/HEAD.svg";
 import { useEffect, useRef, useState } from "react";
-import { getUniqueId } from "../../extra/utils";
 import MoreHoriIcon from "../icon/MoreHoriIcon";
 import ContextMenu, { Vector2 } from "../widget/ContextMenu";
 import { useWorkspaceStore } from "@/store/workspaceStore";
@@ -47,18 +46,10 @@ const folderContextMenuItems = [
   "Add Folder",
   "Add Request",
   "Duplicate",
-  "Cut",
-  "Paste",
   "Rename",
   "Delete",
 ];
-const requestContextMenuItems = [
-  "Open",
-  "Duplicate",
-  "Cut",
-  "Rename",
-  "Delete",
-];
+const requestContextMenuItems = ["Open", "Duplicate", "Rename", "Delete"];
 
 export default function RequestHierarchy() {
   const hierarchyRef = useRef<HTMLDivElement>(null);
@@ -71,6 +62,7 @@ export default function RequestHierarchy() {
     duplicateItem,
     renameItem,
     deleteItem,
+    openTab,
   ] = useWorkspaceStore(
     useShallow((state) => [
       state.local.collections,
@@ -80,6 +72,7 @@ export default function RequestHierarchy() {
       state.duplicateItem,
       state.renameItem,
       state.deleteItem,
+      state.addOpenedTab,
     ])
   );
 
@@ -147,6 +140,7 @@ export default function RequestHierarchy() {
     } else {
       switch (item) {
         case "Open":
+          openTab(selectedTreeId);
           break;
         case "Duplicate":
           duplicateItem(selectedTreeId);

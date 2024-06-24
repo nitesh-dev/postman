@@ -1,10 +1,10 @@
+import { EditorRequestTabProps } from "@/components/editor/EditorRequestTab";
 import {
   ChildType,
   Tree,
   TreeCollection,
 } from "@/components/editor/RequestHierarchy";
 import { getUniqueId } from "@/extra/utils";
-import { WritableDraft } from "immer";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -13,12 +13,9 @@ type State = {
     collections: TreeCollection[];
     environment: {};
     openedTabs: string[];
+    activeTab: string;
   };
-  global: {
-    environment: {};
-    members: {};
-    workspaces: {};
-  };
+  global: WorkspaceState;
 };
 
 type Actions = {
@@ -28,6 +25,9 @@ type Actions = {
   duplicateItem(itemId: string): void;
   renameItem(itemId: string, newName: string): void;
   deleteItem(itemId: string): void;
+  addOpenedTab(tabId: string): void;
+  removeOpenedTab(tabId: string): void;
+  setActiveTab(tabId: string): void;
 };
 
 // export const useCountStore = create<State & Actions>()(
@@ -52,8 +52,21 @@ export const useWorkspaceStore = create<State & Actions>()(
           id: getUniqueId(),
           name: "My Collection",
           type: 0,
-          children: [],
-          isOpen: false,
+          children: [
+            {
+              id: getUniqueId(),
+              name: "Request 1",
+              isFav: false,
+              type: 2,
+            },
+            {
+              id: getUniqueId(),
+              name: "Request 2",
+              isFav: false,
+              type: 3,
+            },
+          ],
+          isOpen: true,
         },
         {
           id: getUniqueId(),
@@ -62,21 +75,23 @@ export const useWorkspaceStore = create<State & Actions>()(
           children: [],
           isOpen: false,
         },
-        {
-          id: getUniqueId(),
-          name: "My Collection3",
-          type: 0,
-          children: [],
-          isOpen: false,
-        },
       ],
       environment: {},
       openedTabs: [],
+      activeTab: "",
     },
     global: {
-      environment: {},
-      members: {},
-      workspaces: {},
+      collections: [],
+      environments: [],
+      id: getUniqueId(),
+      name: "",
+      createdAt: 0,
+      globalEnvironment: {
+        createdAt: 0,
+        id: getUniqueId(),
+        name: "",
+        variables: [],
+      },
     },
 
     addFolder: (folderId) => {
@@ -177,6 +192,31 @@ export const useWorkspaceStore = create<State & Actions>()(
         }
       });
     },
+
+    addOpenedTab: (tabId) => {
+      set((state) => {
+        // if tab already opened
+        if (state.local.openedTabs.includes(tabId)) {
+          state.local.activeTab = tabId;
+        } else {
+          state.local.activeTab = tabId;
+          state.local.openedTabs.push(tabId);
+        }
+      });
+    },
+    removeOpenedTab: (tabId) => {
+      set((state) => {
+        state.local.openedTabs = state.local.openedTabs.filter(
+          (id) => id !== tabId
+        );
+      });
+    },
+
+    setActiveTab: (tabId) => {
+      set((state) => {
+        state.local.activeTab = tabId;
+      });
+    },
   }))
 );
 
@@ -225,3 +265,60 @@ function findParentTreeItem(
   }
   return { parent: null, childIndex: -1 };
 }
+
+export type Item = {
+  id: string;
+  createdAt: number;
+};
+// export type User = Item & {
+//   name: string;
+//   email: string;
+//   password: string;
+//   picUrl: string;
+// };
+
+export type WorkspaceState = Item & {
+  name: string;
+  collections: Collection[];
+  environments: Environment[];
+  globalEnvironment: Environment;
+};
+export type Collection = Item & {
+  name: string;
+  description: string;
+  items: CollectionItem[];
+};
+
+export type CollectionItemType = "request" | "folder";
+export type CollectionBaseItem = Item & {
+  type: CollectionItemType;
+  name: string;
+  description: string;
+};
+export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
+export type Body = {
+  type: "raw" | "form-data" | "urlencoded" | "file";
+  data: any;
+};
+export type RequestItem = CollectionBaseItem & {
+  url: string;
+  method: HttpMethod;
+  body: Body;
+  headers: { [key: string]: string };
+};
+export type FolderItem = CollectionBaseItem & {
+  items: CollectionItem[];
+};
+
+export type CollectionItem = RequestItem | FolderItem;
+
+//-------environment-------
+
+export type Environment = Item & {
+  name: string;
+  variables: EnvironmentVariable[];
+};
+export type EnvironmentVariable = Omit<Item, "createdAt"> & {
+  key: string;
+  value: string;
+};
